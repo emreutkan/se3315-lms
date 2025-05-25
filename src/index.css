@@ -1,13 +1,334 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --primary-color: #4361ee;
+  --primary-light: #4895ef;
+  --primary-dark: #3f37c9;
+  --success-color: #4cc9f0;
+  --danger-color: #f72585;
+  --warning-color: #f8961e;
+  --dark-color: #212529;
+  --light-color: #f8f9fa;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+  --border-radius: 8px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--gray-100);
+  color: var(--dark-color);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 8px 15px;
+  transition: var(--transition);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+input, select {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* Layout Styles */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-container {
+  padding: 20px;
+  flex: 1;
+}
+
+/* Table Styles */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.data-table th, .data-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.data-table th {
+  background-color: var(--gray-200);
+}
+
+/* Status Indicators */
+.status-available {
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+.status-borrowed {
+  color: var(--warning-color);
+  font-weight: bold;
+}
+
+.return-date.urgent {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.return-date.close {
+  color: var(--warning-color);
+  font-weight: bold;
+}
+
+/* Action Buttons */
+.action-btn {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: var(--primary-light);
+}
+
+/* Login Form */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--gray-100);
+}
+
+.login-form {
+  background: white;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.toggle-form {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.toggle-btn {
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.modal-btn {
+  margin-left: 10px;
+}
+
+.modal-btn-cancel {
+  background-color: var(--gray-500);
+}
+
+.modal-btn-primary {
+  background-color: var(--primary-color);
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--gray-500);
+}
+
+/* User Badges */
+.user-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: var(--primary-light);
+  color: white;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  margin-left: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-type-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-type-admin {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.user-type-normal {
+  background-color: var(--success-color);
+  color: white;
+}
+
+/* Admin Dashboard */
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.date-options {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.date-options button {
+  flex: 1;
+  background-color: var(--gray-300);
+  color: var(--dark-color);
+}
+
+.date-options button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Search Section */
+.search-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-section input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.search-section select {
+  width: 150px;
+  margin-bottom: 0;
+}
+
+/* Error Message */
+.error-message {
+  color: var(--danger-color);
+  background-color: rgba(247, 37, 133, 0.1);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  text-align: center;
 }
