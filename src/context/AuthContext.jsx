@@ -9,15 +9,32 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token) {
-      const { sub: username, is_admin } = jwtDecode(token);
-      setUser({ username, isAdmin: is_admin, token });
+      try {
+        const decoded = jwtDecode(token);
+        const { sub: username, is_admin } = decoded;
+        // Ensure is_admin is properly converted to boolean
+        const isAdminBool = is_admin === true || is_admin === 'true' || is_admin === 1;
+        console.log('JWT decoded:', { ...decoded, username, is_admin, convertedToBoolean: isAdminBool });
+        setUser({ username, isAdmin: isAdminBool, token });
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        localStorage.removeItem('access_token'); // Remove invalid token
+      }
     }
   }, []);
 
   const login = token => {
     localStorage.setItem('access_token', token);
-    const { sub: username, is_admin } = jwtDecode(token);
-    setUser({ username, isAdmin: is_admin, token });
+    try {
+      const decoded = jwtDecode(token);
+      const { sub: username, is_admin } = decoded;
+      // Ensure is_admin is properly converted to boolean, default to false if undefined
+      const isAdminBool = is_admin === true || is_admin === 'true' || is_admin === 1;
+      console.log('Login JWT decoded:', { ...decoded, username, is_admin, convertedToBoolean: isAdminBool });
+      setUser({ username, isAdmin: isAdminBool, token });
+    } catch (error) {
+      console.error('Error decoding token:', error);
+    }
   };
 
   const logout = () => {

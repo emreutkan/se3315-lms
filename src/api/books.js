@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://3315backend-d9hnd9dbfzg2a5gj.polandcentral-01.azurewebsites.net/api';
 const api = axios.create({ baseURL: API_BASE_URL });
 
 export const listBooks = async token => {
@@ -46,3 +46,4 @@ export const returnBook = async (token, bookId) => {
     throw error;
   }
 };
+
