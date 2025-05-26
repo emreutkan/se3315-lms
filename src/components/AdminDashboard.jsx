@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import DashboardLayout from './DashboardLayout';
 import BookTable from './BookTable';
 import UserTable from './UserTable';
-import AddUserModal from './modals/AddUserModal';
-import AddBookModal from './modals/AddBookModal';
-import AssignBookModal from './modals/AssignBookModal';
+// Fix import paths for modal components
+import AddUserModal from '../components/modals/AddUserModal';
+import AddBookModal from '../components/modals/AddBookModal';
+import AssignBookModal from '../components/modals/AssignBookModal';
 import { listBooks, returnBook as apiReturn } from '../api/books';
 import { listUsers } from '../api/users';
 import { AuthContext } from '../context/AuthContext';

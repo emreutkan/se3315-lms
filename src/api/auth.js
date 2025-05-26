@@ -1,5 +1,7 @@
 import axios from 'axios';
-const api = axios.create({ baseURL: 'http://127.0.0.1:5000/api' });
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:5000/api';
+const api = axios.create({ baseURL: API_BASE_URL });
+
 export const login = async (username, password) => {
   console.log('login called with username:', username);
   try {
