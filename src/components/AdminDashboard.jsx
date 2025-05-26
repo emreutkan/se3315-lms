@@ -66,8 +66,9 @@ export default function AdminDashboard() {
   const filteredBooks = books.filter(b =>
     !filter.term ||
     (filter.type === 'title' && b.title.toLowerCase().includes(filter.term.toLowerCase())) ||
-    (filter.type === 'isbn' && b.isbn.includes(filter.term)) ||
-    (filter.type === 'category' && b.category.toLowerCase().includes(filter.term.toLowerCase()))
+    (filter.type === 'isbn' && b.isbn && b.isbn.toLowerCase().includes(filter.term.toLowerCase())) ||
+    (filter.type === 'category' && b.category.toLowerCase().includes(filter.term.toLowerCase())) ||
+    (filter.type === 'author' && b.author.toLowerCase().includes(filter.term.toLowerCase()))
   );
 
   // Filter users based on search
@@ -107,6 +108,7 @@ export default function AdminDashboard() {
             >
               <option value="title">Book Title</option>
               <option value="isbn">ISBN</option>
+              <option value="author">Author</option>
               <option value="category">Category</option>
             </select>
           </div>

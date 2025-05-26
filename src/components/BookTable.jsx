@@ -9,7 +9,7 @@ export default function BookTable({ books, onAssign, onReturn, isAdmin }) {
           {isAdmin && <th>ID</th>}
           <th>Book Title</th>
           <th>Author</th>
-          {isAdmin && <th>ISBN</th>}
+          <th>ISBN</th>
           <th>Category</th>
           <th>Status</th>
           <th>Due Date</th>
@@ -28,7 +28,7 @@ export default function BookTable({ books, onAssign, onReturn, isAdmin }) {
               {isAdmin && <td>{b.id}</td>}
               <td>{b.title}</td>
               <td>{b.author}</td>
-              {isAdmin && <td>{b.isbn}</td>}
+              <td>{b.isbn}</td>
               <td>{b.category}</td>
               <td>
                 <span className={b.available ? 'status-available' : 'status-borrowed'}>
