@@ -1,7 +1,7 @@
 export function formatDate(date) {
   if (!date) return "-";
   const d = new Date(date);
-  return d.toLocaleDateString('tr-TR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
 export function daysRemaining(date, now = new Date()) {
   if (!date) return null;
